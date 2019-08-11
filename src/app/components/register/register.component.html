@@ -1,1 +1,66 @@
-<p>{{title}}</p>
+<div class="col-md-12 mt-3">
+  <h1>{{title}}</h1>
+  <p>registro de usuarios</p>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header">{{title}}</div>
+          <div class="card-body">
+
+            <form [formGroup]="form" (ngSubmit)="onRegister()">
+
+              <div class="form-group row">
+                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                <div class="col-md-6">
+                  <input id="name" type="text" class="form-control"
+                         formControlName="name"
+                         [ngClass]="{ 'is-invalid':submitted && !fields.name.valid }">
+                  <div *ngIf="submitted && !fields.name.valid" class="invalid-feedback">
+                    <small *ngIf="fields.name.errors.required" class="text-danger">Name is required</small>
+                    <small *ngIf="fields.name.errors.pattern" class="text-danger">This name is invalid</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                <div class="col-md-6">
+                  <input id="email" type="text" class="form-control"
+                         formControlName="email"
+                         [ngClass]="{ 'is-invalid':submitted && !fields.email.valid }">
+                  <div *ngIf="submitted && !fields.email.valid" class="invalid-feedback">
+                    <small *ngIf="fields.email.errors.required" class="text-danger">Email is required</small>
+                    <small *ngIf="fields.email.errors.email" class="text-danger">Email must be a valid email address</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <div class="col-md-6">
+                  <input id="password" type="password" class="form-control"
+                         formControlName="password"
+                         [ngClass]="{ 'is-invalid':submitted && !fields.password.valid }">
+                  <div *ngIf="submitted && !fields.password.valid" class="invalid-feedback">
+                    <small *ngIf="fields.password.errors.required" class="text-danger">Password is required</small>
+                    <small *ngIf="fields.password.errors.minlength" class="text-danger">Password must be at least 6 characters</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row mb-4">
+                <div class="col-md-6 offset-md-4">
+                  <button type="submit" class="btn btn-success">Register</button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
