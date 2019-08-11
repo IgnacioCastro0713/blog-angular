@@ -10,13 +10,10 @@ import { global } from './global';
 })
 export class UserService {
 
-  public url: string;
-
   constructor(private _http: HttpClient) {
-    this.url = global.url;
   }
 
   register(user: User): Observable<any> {
-    return this._http.post(this.url.concat('auth/register'), user);
+    return this._http.post(global.url.concat('auth/register'), user);
   }
 }

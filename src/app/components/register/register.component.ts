@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service'
+import {Router} from "@angular/router"
+
+import { MustMatch } from '../../_helpers/must-match.validator';
 
 @Component({
   selector: 'register',
@@ -16,16 +19,19 @@ export class RegisterComponent implements OnInit {
   public user: User;
 
   public form: FormGroup;
-  public submitted = false;
+  public submitted: boolean = false;
+  public errors: any;
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _service: UserService
+    private _service: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.title = 'register';
     this.validators();
+    this.errors = []
   }
 
   validators() {
@@ -33,7 +39,8 @@ export class RegisterComponent implements OnInit {
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email] ],
       password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+      confirmPassword: ['', Validators.required],
+    }, {validator: MustMatch('password', 'confirmPassword')});
   }
 
   get fields() { return this.form.controls; }
@@ -49,11 +56,17 @@ export class RegisterComponent implements OnInit {
     this._service.register(this.user).subscribe(
       res => {
         console.log(res);
-        this.submitted = false;
-        this.form.reset()
+        if (res.ok) {
+          this.submitted = false;
+
+          this.form.reset();
+          // @ts-ignore
+          this.router.navigateByUrl('/login',{res: res.ok});
+        }
         },
-      error => {
-        console.log(<any>error);
+      err => {
+        console.log(<any>err);
+        this.errors = err.error.errors;
       }
     );
 
