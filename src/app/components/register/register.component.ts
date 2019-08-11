@@ -17,10 +17,10 @@ export class RegisterComponent implements OnInit {
 
   public title: string;
   public user: User;
-
-  public form: FormGroup;
-  public submitted: boolean = false;
   public errors: any;
+
+  private form: FormGroup;
+  private submitted: boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,

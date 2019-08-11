@@ -10,8 +10,7 @@ import { global } from './global';
 })
 export class UserService {
 
-  constructor(private _http: HttpClient) {
-  }
+  constructor(private _http: HttpClient) {}
 
   register(user: User): Observable<any> {
     return this._http.post(global.url.concat('auth/register'), user);
