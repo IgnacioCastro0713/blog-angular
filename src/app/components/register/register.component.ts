@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import {Router} from '@angular/router';
-
 import { MustMatch } from '../../_helpers/must-match.validator';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +13,7 @@ import { MustMatch } from '../../_helpers/must-match.validator';
   providers: [UserService]
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('errorToast', undefined) private errorToast: SwalComponent;
 
   public title: string;
   public user: User;
@@ -48,7 +49,10 @@ export class RegisterComponent implements OnInit {
 
     this.submitted = true;
 
-    if (this.form.invalid) { return; }
+    if (this.form.invalid) {
+      this.errorToast.show();
+      return;
+    }
 
     this.user = this.form.value;
 
@@ -61,6 +65,7 @@ export class RegisterComponent implements OnInit {
       },
       err => {
         this.errors = err.error.errors;
+        this.errorToast.show();
       }
     );
 
