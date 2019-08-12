@@ -1,14 +1,13 @@
-/* tslint:disable */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { User } from '../../models/user';
-import { UserService } from '../../services/user.service'
-import {Router} from "@angular/router"
+import { UserService } from '../../services/user.service';
+import {Router} from '@angular/router';
 
 import { MustMatch } from '../../_helpers/must-match.validator';
 
 @Component({
-  selector: 'register',
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   providers: [UserService]
@@ -20,22 +19,22 @@ export class RegisterComponent implements OnInit {
   public errors: any;
 
   private form: FormGroup;
-  private submitted: boolean = false;
+  private submitted = false;
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _service: UserService,
+    private formBuilder: FormBuilder,
+    private service: UserService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.title = 'register';
     this.validators();
-    this.errors = []
+    this.errors = [];
   }
 
   validators() {
-    this.form = this._formBuilder.group({
+    this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email] ],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -49,23 +48,18 @@ export class RegisterComponent implements OnInit {
 
     this.submitted = true;
 
-    if (this.form.invalid) return;
+    if (this.form.invalid) { return; }
 
     this.user = this.form.value;
 
-    this._service.register(this.user).subscribe(
-      res => {
-        console.log(res);
-        if (res.ok) {
-          this.submitted = false;
-
-          this.form.reset();
-          // @ts-ignore
-          this.router.navigateByUrl('/login',{res: res.ok});
-        }
-        },
+    this.service.register(this.user).subscribe(
+      response => {
+        if (!response.ok) { return; }
+        this.submitted = false;
+        this.form.reset();
+        this.router.navigateByUrl('/login');
+      },
       err => {
-        console.log(<any>err);
         this.errors = err.error.errors;
       }
     );

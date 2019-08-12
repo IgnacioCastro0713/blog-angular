@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'; /*important*/
 import { HttpClientModule } from '@angular/common/http'; /*important*/
 import { routing, appRoutingProviders } from './app.routing';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
