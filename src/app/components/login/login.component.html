@@ -1,1 +1,51 @@
-<p>{{title}}</p>
+<div class="col-md-12 mt-3">
+  <h1>{{title}}</h1>
+  <swal #successToast [options]="{type: 'success', title: 'successfully logged', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
+  <swal #errorToast [options]="{type: 'error', title: 'Invalid credentials verify the information entered', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header">Login</div>
+
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onLogin()">
+
+              <div class="form-group row">
+                <label for="email" class="col-sm-4 col-form-label text-md-right">Email Address</label>
+                <div class="col-md-6">
+                  <input id="email" type="email" class="form-control" formControlName="email"
+                         [ngClass]="{ 'is-invalid':submitted && !fields.email.valid}">
+                  <div *ngIf="submitted && !fields.email.valid" class="invalid-feedback">
+                    <small *ngIf="fields.email.errors.required" class="text-danger">Email field is required</small>
+                    <small *ngIf="fields.email.errors.email" class="text-danger">Email must be a valid email address</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <div class="col-md-6">
+                  <input id="password" type="password" class="form-control" formControlName="password"
+                         [ngClass]="{ 'is-invalid':submitted && !fields.password.valid}">
+                  <div *ngIf="submitted && !fields.password.valid" class="invalid-feedback">
+                    <small *ngIf="fields.password.errors.required" class="text-danger">Password field is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row mb-4">
+                <div class="col-md-8 offset-md-4">
+                  <button type="submit" class="btn btn-primary">
+                    Login
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

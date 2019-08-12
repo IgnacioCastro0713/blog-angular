@@ -14,4 +14,9 @@ export class UserService {
   register(user: User): Observable<any> {
     return this.http.post(global.url.concat('auth/register'), user);
   }
+
+  login(credentials): Observable<any> {
+    return this.http.post(global.url.concat('auth/login'), credentials);
+  }
+
 }
