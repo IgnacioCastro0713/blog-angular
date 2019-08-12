@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   public title: string;
   public user: User;
 
+  private identity;
+  private token;
   private form: FormGroup;
   private submitted = false;
 
@@ -50,10 +52,18 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.service.login(this.form).subscribe(
+    this.user = this.form.value;
+
+    this.service.login(this.user).subscribe(
       response => {
         if (!response.ok) { return; }
-        this.user = response.user;
+
+        this.identity = response.user;
+        this.token = response.token;
+
+        localStorage.setItem('identity', JSON.stringify(this.identity));
+        localStorage.setItem('token', this.token);
+
         this.successToast.show();
         this.submitted = false;
         this.form.reset();
