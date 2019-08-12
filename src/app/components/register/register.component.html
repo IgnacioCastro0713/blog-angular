@@ -1,6 +1,6 @@
 <div class="col-md-12 mt-3">
   <h1>{{title}}</h1>
-  <p>registro de usuarios</p>
+  <swal #successToast [options]="{type: 'success', title: 'user successfully registered', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
   <swal #errorToast [options]="{type: 'error', title: 'verify the information entered', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
   <div class="container">
     <div class="row justify-content-center">

@@ -13,6 +13,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   providers: [UserService]
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('successToast', undefined) private successToast: SwalComponent;
   @ViewChild('errorToast', undefined) private errorToast: SwalComponent;
 
   public title: string;
@@ -59,6 +60,7 @@ export class RegisterComponent implements OnInit {
     this.service.register(this.user).subscribe(
       response => {
         if (!response.ok) { return; }
+        this.successToast.show();
         this.submitted = false;
         this.form.reset();
         this.router.navigateByUrl('/login');
