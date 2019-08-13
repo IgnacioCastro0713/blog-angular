@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         this.successToast.show();
         this.submitted = false;
         this.form.reset();
-        this.router.navigateByUrl('/login');
+        this.router.navigate(['/home']);
       },
       err => {
         this.errors = err.error.errors;

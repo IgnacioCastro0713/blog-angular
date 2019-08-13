@@ -37,7 +37,9 @@ import { ErrorComponent } from './components/error/error.component';
   providers: [
     appRoutingProviders,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+/*
     { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
+*/
   ],
   bootstrap: [AppComponent]
 })

@@ -37,7 +37,7 @@ export class AuthenticationService {
   get token() {
     let token = localStorage.getItem('token');
     if (token && token != 'undefined')
-      return this._token;
+      return this._token = token;
     return  this._token = null;
   }
 }
