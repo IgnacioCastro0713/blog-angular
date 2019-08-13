@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import {Router} from '@angular/router';
-import { MustMatch } from '../../_helpers/must-match.validator';
+import { MustMatch } from '../../helpers/must-match.validator';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [UserService]
+  providers: [AuthenticationService]
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('successToast', undefined) private successToast: SwalComponent;
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: UserService,
+    private service: AuthenticationService,
     private router: Router
   ) {}
 

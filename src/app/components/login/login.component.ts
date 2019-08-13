@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
@@ -9,7 +9,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [UserService]
+  providers: [AuthenticationService]
 })
 export class LoginComponent implements OnInit {
   @ViewChild('successToast', undefined) private successToast: SwalComponent;
@@ -25,9 +25,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: UserService,
+    private service: AuthenticationService,
     private router: Router,
-  ) {}
+  ) {
+    if (this.service.identity) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit() {
     this.title = 'Login';
@@ -67,6 +71,7 @@ export class LoginComponent implements OnInit {
         this.successToast.show();
         this.submitted = false;
         this.form.reset();
+        this.router.navigate(['/']);
     },
       error => {
         this.errorToast.show();
