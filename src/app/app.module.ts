@@ -1,17 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'; /*important*/
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; /*important*/
+import { HttpClientModule} from '@angular/common/http'; /*important*/
 import { routing, appRoutingProviders } from './app.routing';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { TokenInterceptor } from './helpers/token.interceptor';
-import { RefreshTokenInterceptor } from './helpers/refresh-refresh.interceptor';
+import { tokenInterceptorProvider, errorInterceptorProvider } from './helpers/';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import { ErrorComponent } from './components/error/error.component';
+import {
+  LoginComponent,
+  RegisterComponent,
+  HomeComponent,
+  ErrorComponent
+} from './components'
 
 
 @NgModule({
@@ -36,10 +37,8 @@ import { ErrorComponent } from './components/error/error.component';
   ],
   providers: [
     appRoutingProviders,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-/*
-    { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
-*/
+    tokenInterceptorProvider,
+    errorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

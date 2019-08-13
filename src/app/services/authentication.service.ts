@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../models/user';
+import { User } from '../models';
 import {Observable} from 'rxjs';
 import { environment } from '../../environments/environment';
-import {flatMap} from 'tslint/lib/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +22,8 @@ export class AuthenticationService {
     return this.http.post(environment.base_url.concat('auth/login'), user);
   }
 
-  refreshToken(): Observable<any> {
-    return this.http.post(environment.base_url.concat('auth/refresh') ,{});
+  logout(): Observable<any>{
+    return this.http.post(environment.base_url.concat('auth/logout'), {});
   }
 
   get identity() {

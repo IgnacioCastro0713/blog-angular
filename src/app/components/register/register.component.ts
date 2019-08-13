@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-import { User } from '../../models/user';
-import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../models';
+import { AuthenticationService } from '../../services';
 import {Router} from '@angular/router';
-import { MustMatch } from '../../helpers/must-match.validator';
+import { MustMatch } from '../../helpers/';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         this.successToast.show();
         this.submitted = false;
         this.form.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       },
       err => {
         this.errors = err.error.errors;
