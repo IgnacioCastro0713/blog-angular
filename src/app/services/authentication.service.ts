@@ -22,8 +22,11 @@ export class AuthenticationService {
     return this.http.post(environment.base_url.concat('auth/login'), user);
   }
 
-  logout(): Observable<any>{
-    return this.http.post(environment.base_url.concat('auth/logout'), {});
+  logout(): Observable<any> {
+    let response = this.http.post(environment.base_url.concat('auth/logout'), {});
+    this._identity = null;
+    this._token = null;
+    return response;
   }
 
   get identity() {
