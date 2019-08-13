@@ -13,8 +13,16 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401) {
         // auto logout if 401 response returned from api
-        this.service.logout();
-        location.reload(true);
+        this.service.logout().subscribe(response => {
+          if (response.ok) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.clear();
+          }
+        }, error => {
+          localStorage.clear()
+        });
+        location.reload();
       }
 
       const error = err.error.message || 401;

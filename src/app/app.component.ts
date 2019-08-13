@@ -33,7 +33,7 @@ export class AppComponent {
       }
     }, error => {
         if (error) {
-          console.log();
+          localStorage.clear();
         }
       }
     );
