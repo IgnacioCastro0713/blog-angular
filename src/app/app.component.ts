@@ -26,14 +26,14 @@ export class AppComponent {
       response => {
         if (response.ok) {
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.removeItem('identity');
         this.infoToast.show();
         this.router.navigate(['/']);
       }
     }, error => {
         if (error) {
           localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          localStorage.removeItem('identity');
         }
       }
     );

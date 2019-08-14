@@ -27,7 +27,11 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: AuthenticationService,
     private router: Router
-  ) {}
+  ) {
+    if (this.service.identity) {
+      this.router.navigate(['/'])
+    }
+  }
 
   ngOnInit() {
     this.title = 'register';

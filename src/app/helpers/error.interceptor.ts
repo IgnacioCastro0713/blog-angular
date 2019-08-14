@@ -16,13 +16,13 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.service.logout().subscribe(response => {
           if (response.ok) {
             localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            localStorage.removeItem('identity');
             localStorage.clear();
           }
         }, error => {
           if (error) {
             localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            localStorage.removeItem('identity');
           }
         });
         location.reload();
