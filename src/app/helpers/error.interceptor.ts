@@ -20,7 +20,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             localStorage.clear();
           }
         }, error => {
-          localStorage.clear()
+          if (error) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+          }
         });
         location.reload();
       }

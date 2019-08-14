@@ -27,13 +27,13 @@ export class AppComponent {
         if (response.ok) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        localStorage.clear();
         this.infoToast.show();
         this.router.navigate(['/']);
       }
     }, error => {
         if (error) {
-          localStorage.clear();
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
         }
       }
     );
