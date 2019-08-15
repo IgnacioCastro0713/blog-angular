@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   private identity;
   private token;
   private form: FormGroup;
-  private submitted = false;
+  private submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,

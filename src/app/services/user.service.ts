@@ -9,6 +9,11 @@ import { environment } from '../../environments/environment';
 })
 export class UserService {
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+
+  updateProfile(user: User, id): Observable<any> {
+    return this.http.put(`${environment.base_url}/user/${id}`, user);
+  }
 
 }

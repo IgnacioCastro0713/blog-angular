@@ -11,8 +11,9 @@ import {
   LoginComponent,
   RegisterComponent,
   HomeComponent,
-  ErrorComponent
-} from './components'
+  SettingsProfileComponent,
+  ErrorComponent,
+} from './components';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    SettingsProfileComponent
   ],
   imports: [
     BrowserModule,

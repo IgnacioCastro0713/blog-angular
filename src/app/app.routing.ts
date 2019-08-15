@@ -6,13 +6,15 @@ import {
   LoginComponent,
   HomeComponent,
   RegisterComponent,
-  ErrorComponent
+  ErrorComponent,
+  SettingsProfileComponent
 } from './components';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'settings', component: SettingsProfileComponent, canActivate:[AuthGuard]},
   {path: '**', component: ErrorComponent},
 ];
 

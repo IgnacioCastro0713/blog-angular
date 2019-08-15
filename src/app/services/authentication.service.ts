@@ -29,7 +29,7 @@ export class AuthenticationService {
     return response;
   }
 
-  get identity() {
+  get identity(): User | null {
     let identity = JSON.parse(localStorage.getItem('identity'));
     if (identity && identity != 'undefined')
       return this._identity = identity;
