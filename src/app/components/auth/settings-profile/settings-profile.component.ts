@@ -34,10 +34,15 @@ export class SettingsProfileComponent implements OnInit {
 
   validator() {
     this.form = this.formBuilder.group({
+      id: null,
       name: ['', Validators.required],
       surname: ['', Validators.required]
     });
 
+  }
+
+  private prepare() {
+    return new User().deserialize(this.form)
   }
 
   onUpdateProfile() {
@@ -48,7 +53,7 @@ export class SettingsProfileComponent implements OnInit {
       return;
     }
 
-    this._userService.updateProfile(this.user, this._authService.identity.id).subscribe(
+    this._userService.updateProfile(null, this._authService.identity.id).subscribe(
       response => {
         if (!response.ok) { return; }
         this.submitted = false;

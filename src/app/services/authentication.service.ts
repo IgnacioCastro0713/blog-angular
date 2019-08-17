@@ -32,7 +32,7 @@ export class AuthenticationService {
   get identity(): User | null {
     let identity = JSON.parse(localStorage.getItem('identity'));
     if (identity && identity != 'undefined')
-      return this._identity = identity;
+      return this._identity = new User().deserialize(identity);
     return this._identity = null;
   }
 

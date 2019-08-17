@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public title: string;
   public user: User;
 
-  private identity;
+  private identity: User;
   private token;
   private form: FormGroup;
   private submitted: boolean = false;
