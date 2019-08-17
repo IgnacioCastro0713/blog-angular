@@ -42,7 +42,7 @@ export class SettingsProfileComponent implements OnInit {
   }
 
   private prepare() {
-    return new User().deserialize(this.form)
+    return new User(this.form)
   }
 
   onUpdateProfile() {
@@ -53,7 +53,7 @@ export class SettingsProfileComponent implements OnInit {
       return;
     }
 
-    this._userService.updateProfile(null, this._authService.identity.id).subscribe(
+    this._userService.updateProfile(this.prepare(), this._authService.identity.id).subscribe(
       response => {
         if (!response.ok) { return; }
         this.submitted = false;

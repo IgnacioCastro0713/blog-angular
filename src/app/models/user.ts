@@ -1,23 +1,21 @@
-import {Deserializable} from "./deserializable.model";
+export class User {
 
-export class User implements Deserializable{
+  private id: number;
+  private name?: string;
+  private surname?: string;
+  private email?: string;
+  private password?: string;
+  private role?: string;
+  private description?: string;
+  private image?: string;
 
-  public id: number;
-  public name?: string;
-  public surname?: string;
-  public email?: string;
-  public password?: string;
-  public role?: string;
-  public description?: string;
-  public image?: string;
-
-  deserialize(input: any, get: boolean = false): this {
+  constructor(input: any, get: boolean = false) {
     Object.assign(this, input);
-    //this.role = get ? new User().deserialize(input.role) : new User().deserialize(input.role).role;
-    return this;
   }
 
   getFullName() {
     return this.name + ' ' + this.surname;
   }
 }
+
+//this.role = get ? new User().deserialize(input.role) : new User().deserialize(input.role).role;
