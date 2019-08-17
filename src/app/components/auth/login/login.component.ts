@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.user = this.form.value;
+    this.user = new User().deserialize(this.form.value);
 
     this.service.login(this.user).subscribe(
       response => {

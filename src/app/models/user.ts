@@ -1,4 +1,6 @@
-export class User {
+import {Deserializable} from "./deserializable.model";
+
+export class User implements Deserializable{
 
   public id: number;
   public name?: string;
@@ -9,12 +11,13 @@ export class User {
   public description?: string;
   public image?: string;
 
-  deserialize(input: any): this {
+  deserialize(input: any, get: boolean = false): this {
     Object.assign(this, input);
+    //this.role = get ? new User().deserialize(input.role) : new User().deserialize(input.role).role;
     return this;
   }
 
-  public getFullName() {
+  getFullName() {
     return this.name + ' ' + this.surname;
   }
 }
