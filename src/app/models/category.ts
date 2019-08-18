@@ -1,9 +1,8 @@
-/* tslint:disable */
 export class Category {
   private id: number;
   private name: string;
 
-  constructor(input: any, get: boolean = false) {
+  constructor(input: any) {
     Object.assign(this, input);
   }
 }

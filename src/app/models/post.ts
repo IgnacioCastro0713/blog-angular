@@ -1,5 +1,5 @@
-import {User} from './user';
-import {Category} from './category';
+import { User } from './user';
+import { Category } from './category';
 
 export class Post {
   private id: number;
@@ -10,8 +10,18 @@ export class Post {
   private image: string;
   private createdAt: any;
 
-  constructor(input: any, get: boolean = false) {
+  constructor(input: any) {
     Object.assign(this, input);
-    this.category_id = get ? new Category(input.category) : input.category_id;
+
+    if (input.category) {
+      Object.defineProperty(this, 'category', input.category);
+      delete this.category_id;
+    }
+
+    if (input.user) {
+      Object.defineProperty(this, 'user', input.user);
+      delete this.user_id;
+    }
+
   }
 }

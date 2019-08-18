@@ -1,5 +1,4 @@
 export class User {
-
   private id: number;
   private name?: string;
   private surname?: string;
@@ -9,7 +8,7 @@ export class User {
   private description?: string;
   private image?: string;
 
-  constructor(input: any, get: boolean = false) {
+  constructor(input: any) {
     Object.assign(this, input);
   }
 
@@ -17,5 +16,3 @@ export class User {
     return this.name + ' ' + this.surname;
   }
 }
-
-//this.role = get ? new User().deserialize(input.role) : new User().deserialize(input.role).role;
