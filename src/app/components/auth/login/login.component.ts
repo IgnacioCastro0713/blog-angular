@@ -9,7 +9,6 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AuthenticationService]
 })
 export class LoginComponent implements OnInit {
   @ViewChild('successToast', undefined) private successToast: SwalComponent;

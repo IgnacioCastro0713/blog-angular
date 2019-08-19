@@ -1,12 +1,13 @@
 export class User {
-  private id: number;
-  private name?: string;
-  private surname?: string;
-  private email?: string;
-  private password?: string;
-  private role?: string;
-  private description?: string;
-  private image?: string;
+
+  public id: number;
+  public name: string;
+  public surname: string;
+  public email: string;
+  public password: string;
+  public role: string;
+  public description: string;
+  public image: string;
 
   constructor(input: any) {
     Object.assign(this, input);
