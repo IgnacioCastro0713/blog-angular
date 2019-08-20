@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { UserService, AuthenticationService } from '../../../services';
 import { User } from '../../../models';
@@ -11,10 +11,15 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./settings-profile.component.css']
 })
 export class SettingsProfileComponent implements OnInit {
-  public title: string;
-  private user: User;
+  @ViewChild('successToast', undefined) private successToast: SwalComponent;
+  @ViewChild('errorToast', undefined) private errorToast: SwalComponent;
+
+  public title: string = 'Edit Profile';
+  public errors: any = [];
+
   private form: FormGroup;
   private submitted: boolean = false;
+
 
   constructor(
     private _authService: AuthenticationService,
@@ -23,26 +28,26 @@ export class SettingsProfileComponent implements OnInit {
     private router: Router
   ) { }
 
-  get currentUser () {
-    return this._authService.identity
-  }
+  get fields() { return this.form.controls; }
 
   ngOnInit() {
-    this.title = 'Edit Profile';
     this.validator();
+    this.form.patchValue(this._authService.identity);
   }
 
   validator() {
     this.form = this.formBuilder.group({
       id: null,
-      name: ['', Validators.required],
-      surname: ['', Validators.required]
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]+')]],
+      surname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      description: ['', Validators.required]
     });
 
   }
 
   private prepare() {
-    return new User(this.form)
+    return new User(this.form.value)
   }
 
   onUpdateProfile() {
@@ -50,6 +55,7 @@ export class SettingsProfileComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
+      this.errorToast.show();
       return;
     }
 
@@ -57,11 +63,14 @@ export class SettingsProfileComponent implements OnInit {
       response => {
         if (!response.ok) { return; }
         this.submitted = false;
+        localStorage.setItem('identity', JSON.stringify(response.data));
         this.form.reset();
+        this.successToast.show();
         this.router.navigate(['/'])
       },
-      error => {
-
+      err => {
+        this.errors = err.error.errors;
+        this.errorToast.show();
       }
     );
   }

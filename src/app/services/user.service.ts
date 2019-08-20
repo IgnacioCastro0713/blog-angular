@@ -13,7 +13,7 @@ export class UserService {
 
 
   updateProfile(user: User, id): Observable<any> {
-    return this.http.put(`${environment.base_url}/user/${id}`, user);
+    return this.http.put(`${environment.base_url}user/${id}`, user);
   }
 
 }

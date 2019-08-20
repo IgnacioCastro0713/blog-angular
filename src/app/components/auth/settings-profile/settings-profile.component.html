@@ -1,1 +1,88 @@
-<p>settings-profile works!</p>
+<div class="col-md-12 mt-3">
+  <h1>{{title}}</h1>
+  <swal #successToast [options]="{type: 'success', title: 'user successfully updated', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
+  <swal #errorToast [options]="{type: 'error', title: 'verify the information entered', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">{{title}}</div>
+          <div class="card-body">
+
+            <form [formGroup]="form" (ngSubmit)="onUpdateProfile()">
+
+              <div class="form-row">
+                <div class="col">
+                  <label for="name" class="col-form-label">Name</label>
+                  <input id="name" type="text" class="form-control"
+                         formControlName="name"
+                         [ngClass]="{ 'is-invalid':(submitted && !fields.name.valid) || errors.name}">
+                  <div *ngIf="(submitted && !fields.name.valid) || errors.name" class="invalid-feedback">
+                    <small *ngIf="errors.name" class="text-danger">{{errors.name}}</small> <!-- Back-end errors -->
+                    <small *ngIf="fields.name.errors.required && !errors.name" class="text-danger">Name field is required</small>
+                    <small *ngIf="fields.name.errors.pattern && !errors.name" class="text-danger">This name is invalid</small>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <label for="last_name" class="col-form-label">Last name</label>
+                  <input id="last_name" type="text" class="form-control"
+                         formControlName="surname"
+                         [ngClass]="{ 'is-invalid':(submitted && !fields.surname.valid) || errors.surname}">
+                  <div *ngIf="(submitted && !fields.surname.valid) || errors.surname" class="invalid-feedback">
+                    <small *ngIf="errors.surname" class="text-danger">{{errors.surname}}</small> <!-- Back-end errors -->
+                    <small *ngIf="fields.surname.errors.required && !errors.surname" class="text-danger">Name field is required</small>
+                    <small *ngIf="fields.surname.errors.pattern && !errors.surname" class="text-danger">This name is invalid</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="email" class="col-form-label">Email</label>
+                  <input id="email" type="email" class="form-control"
+                         formControlName="email"
+                         [ngClass]="{ 'is-invalid':(submitted && !fields.email.valid) || errors.email}">
+                  <div *ngIf="(submitted && !fields.email.valid) || errors.email" class="invalid-feedback">
+                    <small *ngIf="errors.email" class="text-danger">{{errors.email}}</small> <!-- Back-end errors -->
+                    <small *ngIf="fields.email.errors.required && !errors.email" class="text-danger">Email field is required</small>
+                    <small *ngIf="fields.email.errors.email && !errors.email" class="text-danger">Email must be a valid email address</small>
+                  </div>
+                </div>
+
+                <div class="form-group  col-md-6">
+                  <label for="email" class="col-form-label">Avatar</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="description" class="col-form-label">Description</label>
+                  <textarea id="description" type="text" class="form-control" cols="5" rows="5"
+                            formControlName="description"
+                            [ngClass]="{ 'is-invalid':(submitted && !fields.description.valid) || errors.description }"></textarea>
+                  <div *ngIf="(submitted && !fields.description.valid) || errors.description" class="invalid-feedback">
+                    <small *ngIf="errors.description" class="text-danger">{{errors.description}}</small> <!-- Back-end errors -->
+                    <small *ngIf="fields.description.errors.required && !errors.description" class="text-danger">Description field is required</small>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group row mb-4">
+                <div class="col-md-6 ">
+                  <button type="submit" class="btn btn-success btn-lg">Save</button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
