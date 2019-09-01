@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-import { UserService, AuthenticationService } from '../../../services';
-import { User } from '../../../models';
+import { UserService, AuthenticationService } from '../../../../services';
+import { User } from '../../../../models';
 import {Router} from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
@@ -20,6 +20,13 @@ export class SettingsProfileComponent implements OnInit {
   private form: FormGroup;
   private submitted: boolean = false;
 
+  public optionsFroala: Object = {
+    charCounterCount: true,
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+  };
 
   constructor(
     private _authService: AuthenticationService,

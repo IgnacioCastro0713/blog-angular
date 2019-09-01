@@ -59,9 +59,10 @@
                   </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                   <label for="description" class="col-form-label">Description</label>
                   <textarea id="description" type="text" class="form-control" cols="5" rows="5"
+                            [froalaEditor]="optionsFroala"
                             formControlName="description"
                             [ngClass]="{ 'is-invalid':(submitted && !fields.description.valid) || errors.description }"></textarea>
                   <div *ngIf="(submitted && !fields.description.valid) || errors.description" class="invalid-feedback">

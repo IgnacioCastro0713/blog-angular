@@ -1,20 +1,15 @@
 import {ModuleWithProviders} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AuthGuard} from './helpers';
+import { AuthRoutes } from './routes'
 
 import {
-  LoginComponent,
   HomeComponent,
-  RegisterComponent,
-  ErrorComponent,
-  SettingsProfileComponent
+  ErrorComponent
 } from './components';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'settings', component: SettingsProfileComponent, canActivate:[AuthGuard]},
+  ...AuthRoutes,
   {path: '**', component: ErrorComponent},
 ];
 

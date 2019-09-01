@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'; /*important*/
 import { HttpClientModule} from '@angular/common/http'; /*important*/
 import { routing, appRoutingProviders } from './app.routing';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { tokenInterceptorProvider, errorInterceptorProvider } from './helpers/';
 
 import { AppComponent } from './app.component';
+import {FroalaModuleEditor, SwalModule} from './components/modules/'
+
 import {
   LoginComponent,
   RegisterComponent,
@@ -30,12 +31,8 @@ import {
     routing,
     ReactiveFormsModule,
     HttpClientModule,
-    SweetAlert2Module.forRoot({
-      buttonsStyling: false,
-      customClass: 'modal-content',
-      confirmButtonClass: 'btn btn-primary',
-      cancelButtonClass: 'btn'
-    })
+    FroalaModuleEditor,
+    SwalModule
   ],
   providers: [
     appRoutingProviders,
