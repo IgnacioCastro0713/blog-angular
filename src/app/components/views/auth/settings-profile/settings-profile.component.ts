@@ -4,6 +4,7 @@ import { UserService, AuthenticationService } from '../../../../services';
 import { User } from '../../../../models';
 import {Router} from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import {environment} from '../../../../../environments/environment'
 
 @Component({
   selector: 'app-settings-profile',
@@ -16,6 +17,8 @@ export class SettingsProfileComponent implements OnInit {
 
   public title: string = 'Edit Profile';
   public errors: any = [];
+  public user: User;
+  public url: string = environment.base_url;
 
   private form: FormGroup;
   private submitted: boolean = false;
@@ -28,6 +31,24 @@ export class SettingsProfileComponent implements OnInit {
     toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
   };
 
+  public afuConfig = {
+    multiple: false,
+    formatsAllowed: ".jpg,.png,.gif,.jpeg",
+    maxSize: "3",
+    uploadAPI:  {
+      url:this.url+"user/upload",
+      headers: {
+        "Authorization" : `Bearer ${this._authService.token}`
+      }
+    },
+    theme: "attachPin",
+    hideProgressBar: false,
+    hideResetBtn: true,
+    hideSelectBtn: false,
+    attachPinText: 'select image profile'
+  };
+
+
   constructor(
     private _authService: AuthenticationService,
     private _userService: UserService,
@@ -36,6 +57,11 @@ export class SettingsProfileComponent implements OnInit {
   ) { }
 
   get fields() { return this.form.controls; }
+
+  get auth(): User {
+    this.user = this._authService.identity;
+    return this.user
+  }
 
   ngOnInit() {
     this.validator();
@@ -48,7 +74,8 @@ export class SettingsProfileComponent implements OnInit {
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]+')]],
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      image: null
     });
 
   }
@@ -65,7 +92,6 @@ export class SettingsProfileComponent implements OnInit {
       this.errorToast.show();
       return;
     }
-
     this._userService.updateProfile(this.prepare(), this._authService.identity.id).subscribe(
       response => {
         if (!response.ok) { return; }
@@ -82,4 +108,8 @@ export class SettingsProfileComponent implements OnInit {
     );
   }
 
+  avatarUpload(data) {
+    let img = JSON.parse(data.response);
+    this.form.controls.image.setValue(img.data);
+  }
 }

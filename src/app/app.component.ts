@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from './models';
 import { AuthenticationService } from './services';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,9 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 })
 export class AppComponent {
   @ViewChild('infoToast', undefined) private infoToast: SwalComponent;
-  title = 'blog-angular';
+  public title = 'blog-angular';
   public user: User;
+  public url: string = environment.base_url;
 
   constructor(private service: AuthenticationService, private router: Router) {}
 

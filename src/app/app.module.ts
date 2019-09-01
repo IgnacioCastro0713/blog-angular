@@ -5,9 +5,11 @@ import { HttpClientModule} from '@angular/common/http'; /*important*/
 import { routing, appRoutingProviders } from './app.routing';
 import { tokenInterceptorProvider, errorInterceptorProvider } from './helpers/';
 
-import { AppComponent } from './app.component';
+//Modules
 import {FroalaModuleEditor, SwalModule} from './components/modules/'
-
+import { AngularFileUploaderModule } from "angular-file-uploader";
+//Component
+import { AppComponent } from './app.component';
 import {
   LoginComponent,
   RegisterComponent,
@@ -32,7 +34,8 @@ import {
     ReactiveFormsModule,
     HttpClientModule,
     FroalaModuleEditor,
-    SwalModule
+    SwalModule,
+    AngularFileUploaderModule
   ],
   providers: [
     appRoutingProviders,
