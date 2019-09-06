@@ -81,7 +81,7 @@ export class SettingsProfileComponent implements OnInit {
   }
 
   private prepare() {
-    return new User(this.form.value)
+    return new User(this.form.value);
   }
 
   onUpdateProfile() {
