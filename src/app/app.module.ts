@@ -5,28 +5,38 @@ import { HttpClientModule} from '@angular/common/http'; /*important*/
 import { routing, appRoutingProviders } from './app.routing';
 import { tokenInterceptorProvider, errorInterceptorProvider } from './helpers/';
 
-//Modules
-import {FroalaModuleEditor, SwalModule} from './components/modules/'
-import { AngularFileUploaderModule } from "angular-file-uploader";
-//Component
+// Modules
+import {FroalaModuleEditor, SwalModule} from './components/modules/';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
+// Component
 import { AppComponent } from './app.component';
 import {
+  // Auth
   LoginComponent,
   RegisterComponent,
-  HomeComponent,
   SettingsProfileComponent,
+  // Home
+  HomeComponent,
   ErrorComponent,
+  // Category
+  CategoryListComponent,
+  CategoryCreateComponent
 } from './components';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    // Auth
     LoginComponent,
     RegisterComponent,
+    SettingsProfileComponent,
+    // Home
     HomeComponent,
     ErrorComponent,
-    SettingsProfileComponent
+    // Category
+    CategoryCreateComponent,
+    CategoryListComponent,
   ],
   imports: [
     BrowserModule,

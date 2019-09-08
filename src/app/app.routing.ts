@@ -1,16 +1,15 @@
-import {ModuleWithProviders} from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthRoutes } from './routes'
+import { AuthRoutes, CategoryRoutes, PostRoutes } from './routes';
 
-import {
-  HomeComponent,
-  ErrorComponent
-} from './components';
+import { HomeComponent, ErrorComponent } from './components';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  { path: '', component: HomeComponent },
   ...AuthRoutes,
-  {path: '**', component: ErrorComponent},
+  ...CategoryRoutes,
+  ...PostRoutes,
+  { path: '**', component: ErrorComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

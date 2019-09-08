@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../../../models';
 import { AuthenticationService } from '../../../../services';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   @ViewChild('successToast', undefined) private successToast: SwalComponent;
@@ -20,12 +21,12 @@ export class LoginComponent implements OnInit {
   private identity: User;
   private token;
   private form: FormGroup;
-  private submitted: boolean = false;
+  private submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: AuthenticationService,
-    private router: Router,
+    private router: Router
   ) {
     if (this.service.identity) {
       this.router.navigate(['/']);
@@ -44,10 +45,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get fields() { return this.form.controls; }
+  get fields() {
+    return this.form.controls;
+  }
 
   onLogin() {
-
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -59,7 +61,9 @@ export class LoginComponent implements OnInit {
 
     this.service.login(this.user).subscribe(
       response => {
-        if (!response.ok) { return; }
+        if (!response.ok) {
+          return;
+        }
 
         this.identity = response.user;
         this.token = response.token;
@@ -71,12 +75,10 @@ export class LoginComponent implements OnInit {
         this.submitted = false;
         this.form.reset();
         this.router.navigate(['/']);
-    },
+      },
       error => {
         this.errorToast.show();
       }
     );
-
   }
-
 }

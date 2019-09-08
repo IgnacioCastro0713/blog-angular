@@ -1,9 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './models';
 import { AuthenticationService } from './services';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -20,19 +20,20 @@ export class AppComponent {
 
   public get auth(): User {
     this.user = this.service.identity;
-    return this.user
+    return this.user;
   }
 
   logout() {
     this.service.logout().subscribe(
       response => {
         if (response.ok) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('identity');
-        this.infoToast.show();
-        this.router.navigate(['/']);
-      }
-    }, error => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('identity');
+          this.infoToast.show();
+          this.router.navigate(['/']);
+        }
+      },
+      error => {
         if (error) {
           localStorage.removeItem('token');
           localStorage.removeItem('identity');

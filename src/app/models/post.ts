@@ -3,7 +3,9 @@ import { Category } from './category';
 
 export class Post {
   public id: number;
+  // tslint:disable-next-line:variable-name
   public user_id: User | number;
+  // tslint:disable-next-line:variable-name
   public category_id: Category | number;
   public title: string;
   public content: string;
