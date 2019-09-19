@@ -7,7 +7,7 @@ import { CategoryService } from '../../../../services';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
-  public categories: any = [];
+  public categories: any;
 
   constructor(private categoryService: CategoryService) {}
 
@@ -16,7 +16,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getAllCategory().subscribe(
+    this.categoryService.getAllCategories().subscribe(
       response => {
         this.categories = response;
         console.log(this.categories);

@@ -17,9 +17,9 @@ export class CategoryService {
     return this.http.post(`${this.url}category/`, category);
   }
 
-  getAllCategory(): Observable<Category[]> {
+  getAllCategories(): Observable<Category[]> {
     return this.http
       .get<any>(`${this.url}category/`)
-      .pipe(map(response => response.data.map(res => new Category(res))));
+      .pipe(map(response => response.data.map(item => new Category(item))));
   }
 }
