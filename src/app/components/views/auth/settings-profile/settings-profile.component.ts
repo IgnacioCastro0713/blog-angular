@@ -1,3 +1,4 @@
+/* tslint:disable:variable-name */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService, AuthenticationService } from '../../../../services';
@@ -9,7 +10,8 @@ import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-settings-profile',
   templateUrl: './settings-profile.component.html',
-  styleUrls: ['./settings-profile.component.css']
+  styleUrls: ['./settings-profile.component.css'],
+  providers: [UserService]
 })
 export class SettingsProfileComponent implements OnInit {
   @ViewChild('successToast', undefined) private successToast: SwalComponent;
@@ -22,7 +24,6 @@ export class SettingsProfileComponent implements OnInit {
 
   private form: FormGroup;
   private submitted = false;
-
   public optionsFroala: object = {
     charCounterCount: true,
     toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],

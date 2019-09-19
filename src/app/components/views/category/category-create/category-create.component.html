@@ -1,1 +1,42 @@
-<p>category-create works!</p>
+<div class="col-md-12 mt-3">
+  <h1>{{title}}</h1>
+  <swal #successToast [options]="{type: 'success', title: 'user successfully updated', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
+  <swal #errorToast [options]="{type: 'error', title: 'verify the information entered', toast: true, position: 'top',showConfirmButton: false,timer: 3000}"></swal>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">{{title}}</div>
+          <div class="card-body">
+
+            <form [formGroup]="form" (ngSubmit)="onStoreCategory()">
+
+              <div class="form-row">
+                <div class="col">
+                  <label for="name" class="col-form-label">Name</label>
+                  <input id="name" type="text" class="form-control"
+                         formControlName="name"
+                         [ngClass]="{ 'is-invalid':(submitted && !fields.name.valid) || errors.name}">
+                  <div *ngIf="(submitted && !fields.name.valid) || errors.name" class="invalid-feedback">
+                    <small *ngIf="errors.name" class="text-danger">{{errors.name}}</small> <!-- Back-end errors -->
+                    <small *ngIf="fields.name.errors.required && !errors.name" class="text-danger">Name field is required</small>
+                    <small *ngIf="fields.name.errors.pattern && !errors.name" class="text-danger">This name is invalid</small>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="form-group row mb-4 mt-1">
+                <div class="col-md-6 ">
+                  <button type="submit" class="btn btn-success btn-lg">Save</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

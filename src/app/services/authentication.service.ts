@@ -1,3 +1,4 @@
+/* tslint:disable:variable-name */
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models';
@@ -12,8 +13,7 @@ export class AuthenticationService {
   private _identity;
   private _token;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   register(user: User): Observable<any> {
     return this.http.post(environment.base_url.concat('auth/register'), user);
@@ -24,23 +24,23 @@ export class AuthenticationService {
   }
 
   logout(): Observable<any> {
-    let response = this.http.post(environment.base_url.concat('auth/logout'), {});
+    const response = this.http.post(environment.base_url.concat('auth/logout'), {});
     this._identity = null;
     this._token = null;
     return response;
   }
 
   get identity(): User | null {
-    let identity = JSON.parse(localStorage.getItem('identity'));
-    if (identity && identity != 'undefined') {
+    const identity = JSON.parse(localStorage.getItem('identity'));
+    if (identity && identity !== 'undefined') {
       return this._identity = new User(identity);
     }
     return this._identity = null;
   }
 
   get token() {
-    let token = localStorage.getItem('token');
-    if (token && token != 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token && token !== 'undefined') {
       return this._token = token;
     }
     return this._token = null;
