@@ -31,8 +31,10 @@
                   <input id="email" type="text" class="form-control"
                          formControlName="email"
                          [ngClass]="{ 'is-invalid':(submitted && !fields.email.valid) || errors.email}">
-                  <div *ngIf="(submitted && !fields.email.valid) || errors.email" class="invalid-feedback">
-                    <small *ngIf="errors.email" class="text-danger">{{errors.email}}</small> <!-- Back-end errors -->
+                  <div class="invalid-feedback"><!-- Back-end errors spacial case form email-->
+                    <small *ngIf="errors.email" class="text-danger">{{errors.email}}</small>
+                  </div>
+                  <div *ngIf="(submitted && !fields.email.valid)" class="invalid-feedback">
                     <small *ngIf="fields.email.errors.required && !errors.email" class="text-danger">Email field is required</small>
                     <small *ngIf="fields.email.errors.email && !errors.email" class="text-danger">Email must be a valid email address</small>
                   </div>

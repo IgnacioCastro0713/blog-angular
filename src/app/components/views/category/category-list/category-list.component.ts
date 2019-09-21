@@ -8,6 +8,7 @@ import { CategoryService } from '../../../../services';
 })
 export class CategoryListComponent implements OnInit {
   public categories: any;
+  public title = 'Categorias';
 
   constructor(private categoryService: CategoryService) {}
 
