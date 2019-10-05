@@ -13,7 +13,7 @@ export class User {
     Object.assign(this, input);
   }
 
-  getFullName() {
+  getFullName(): string {
     return this.name + ' ' + this.surname;
   }
 }
