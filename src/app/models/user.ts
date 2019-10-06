@@ -14,6 +14,6 @@ export class User {
   }
 
   getFullName(): string {
-    return this.name + ' ' + this.surname;
+    return `${this.name}  ${this.surname}`;
   }
 }
